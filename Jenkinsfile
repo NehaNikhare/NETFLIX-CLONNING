@@ -78,7 +78,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 dir('app') {
-                    sh 'docker build TMDB_V3_API_KEY=$API -t $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER .'
+                    sh 'docker build --build-arg TMDB_V3_API_KEY=$API -t $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER .'
                 }
             }
         }
