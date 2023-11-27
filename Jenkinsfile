@@ -103,5 +103,17 @@ pipeline {
                 sh 'docker run -d --name netflix -p 9999:80 $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER'
             }
         }
+
+        post {
+            always {
+            emailext attachLog: true,
+                subject: "'${currentBuild.result}'",
+                body: "Project: ${env.JOB_NAME}<br/>" +
+                    "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                    "URL: ${env.BUILD_URL}<br/>",
+                to: 'soufianeel288@gmail.com',
+                attachmentsPattern: 'trivy_scan.txt,trivy_image_scan.txt'
+            }
+        }
     }
 }
