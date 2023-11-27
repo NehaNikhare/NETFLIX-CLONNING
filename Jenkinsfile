@@ -100,7 +100,7 @@ pipeline {
 
         stage('Deploy Container') {
             steps {
-                sh 'docker run -d --name netflix -p 8081:80 $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER'
+                sh 'docker run -d --name netflix -p 9999:80 $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER'
             }
         }
     }
