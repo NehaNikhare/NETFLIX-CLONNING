@@ -69,7 +69,9 @@ pipeline {
 
         stage('Trivy Scan') {
             steps {
-                sh 'trivy fs app/* > trivy_scan.txt'
+                dir('app') {
+                    sh 'trivy fs . > trivy_scan.txt'
+                }
             }
         }
 
