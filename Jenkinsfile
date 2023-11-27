@@ -60,10 +60,8 @@ pipeline {
 
         stage('OWASP Dependencies Scan') { //Scan 
             steps {
-                dir('app') {
-                    dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-                }
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-CHECK'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
 
