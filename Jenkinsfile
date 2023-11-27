@@ -30,11 +30,14 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 dir('app') {
-                    sh '$SONAR_SCANNER/bin/sonar-scanner \
-                        -Dsonar.projectKey=Netflix-clone \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=$SONAR_IP \
-                        -Dsonar.login=$SONAR_LOGIN'
+                    withSonarQubeEnv('SonarQube-server') {
+                        sh '$SONAR_SCANNER/bin/sonar-scanner \
+                            -Dsonar.projectKey=Netflix-clone \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=$SONAR_IP \
+                            -Dsonar.login=$SONAR_LOGIN'
+                    }
+                   
                 }
             }
         }
