@@ -42,7 +42,7 @@ pipeline {
         stage('Quality gate') {
             steps { //Stop the pipeline and check if SonarQube analysis and check quality gate status
                 script {
-                    waitForQualityGate abortpipeline: false, credentialsID: 'SonarQube-token'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'SonarQube-token'
                 }
             }
         }
