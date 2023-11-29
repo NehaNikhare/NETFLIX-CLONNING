@@ -102,8 +102,8 @@ pipeline {
 
         stage('Change build number') {
             steps {
-                dir("Kubernetes") {
-                    sh 'sed -i -e "s/:v[^ ]*/:v$BUILD_NUMBER/" manifests/netflix.deployment.yaml'
+                dir("Kubernetes/manifests") {
+                    sh 'sed -i -e "s/:v[^ ]*/:v$BUILD_NUMBER/" netflix.deployement.yaml'
                 }
             }
         }
