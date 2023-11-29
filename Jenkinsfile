@@ -12,6 +12,8 @@ pipeline {
         SONAR_LOGIN = credentials('SQ_LOGIN')
         DOCKER_CRD = credentials('DOCKER_CRD')
         API = credentials('TMDB_API')
+        GITHUB_EMAIL = credentials('GITHUB_E')
+        GITHUB = credentials('GITHUB') 
     }
 
     stages {
@@ -78,7 +80,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 dir('app') {
-                    sh 'docker build --build-arg TMDB_V3_API_KEY=$API -t $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER .'
+                    sh 'docker build --build-arg TMDB_V3_API_KEY=$API -t $DOCKER_CRD_USR/netflix-clone:v$BUILD_NUMBER .'
                 }
             }
         }
@@ -87,7 +89,7 @@ pipeline {
             steps {
                 dir('app') {
                     sh 'docker login -u $DOCKER_CRD_USR -p $DOCKER_CRD_PSW'
-                    sh 'docker push $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER'
+                    sh 'docker push $DOCKER_CRD_USR/netflix-clone:v$BUILD_NUMBER'
                 }
             }
         }
@@ -98,9 +100,21 @@ pipeline {
             }
         }
 
-        stage('Deploy Container') {
+        stage('Change build number') {
             steps {
-                sh 'docker run -d --name netflix -p 9999:80 $DOCKER_CRD_USR/netflix-clone:$BUILD_NUMBER'
+                dir("Kubernetes") {
+                    sh 'sed -i -e "s/:v[^ ]*/:v$BUILD_NUMBER/" manifests/netflix.deployment.yaml'
+                }
+            }
+        }
+
+        stage('Git push changes') {
+            steps {
+                sh 'git config user.email $GITHUB_EMAIL'
+                sh 'git config user.name $GITHUB_USR'
+                sh 'git add Kubernetes/manifests/netflix.deployement.yaml'
+                sh 'git commit -m $BUILD_NUMBER'
+                sh 'git push https://$GITHUB_USR:$GITHUB_PSW@github.com/$GITHUB_USR/IoT-test.git'
             }
         }
 

@@ -17,10 +17,12 @@ RUN yarn build
 
 FROM nginx:stable-alpine
 
+RUN sed -i 's/listen\s*80;/listen 9999;/g' /etc/nginx/conf.d/default.conf
+
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=build /app/dist .
 
-EXPOSE 80
+EXPOSE 9999
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
