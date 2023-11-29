@@ -5,8 +5,7 @@ This DevSecOps pipeline orchestrates the end-to-end development, security, and d
 ### !!! Netflix-Clone code its not mine !!!
 
 
-[]("https://github.com/chahid001/Netflix-Clone-DevSecOps/blob/main/assets/s.png")
-
+![](https://github.com/chahid001/Netflix-Clone-DevSecOps/blob/main/assets/s.png)
 # Deployment
 
 ## Step 1: Inistial Setup
