@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: netflix-clone
-          image: soufiane01/netflix:latest
+          image: soufiane01/netflix-clone:7
           ports:
             - containerPort: 9999
