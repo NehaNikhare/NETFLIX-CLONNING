@@ -130,9 +130,9 @@ sudo systemctl restart jenkins
 
 #### Open inbound-ports for :
 
-- Node-exporter
-- Prometheus
-- Grafana
+- Node-exporter: 9100
+- Prometheus: 9090
+- Grafana: 3000
 
 ### Install Prometheus
 
@@ -262,5 +262,71 @@ curl -X POST http://localhost:9090/-/reload
 ```
 
 ### Install Grafana
+
+Like above, run the Grafana script to install it
+
+```bash
+sh setup/grafana.sh
+```
+
+#### Add Prometheus
+
+You can add Prometheus as a Data source, just go to Grafana GUI , HTTP://<IP_ADDR>:3000
+
+- Add Data source
+- Select Prometheus >> Add Connection >> http://localhost:9090
+- Click save
+
+- Return to Home >> Add new Dashboard -> Import a Dashboard
+- Go to [Graphana Labs](https://grafana.com/grafana/dashboards/1860-node-exporter-full/) and copy the ID
+- Return to Grafana and load the ID
+
+
+#### Add Jenkins
+
+- Same thing as Promethus
+- Jenkins dash -> [Grafana Labs](https://grafana.com/grafana/dashboards/9964-jenkins-performance-and-health-overview/)
+
+
+## Step 3: Email add-ons
+
+### Get app Password
+
+#### Go to Manage my google account
+
+- In the search bar, type -app passwords-
+- Create a new app
+- Copy the code
+
+### Setup Jenkins with Email notifications
+
+- Jenkins >> Manage Jenkins -> System -> Email notifications
+- Add the following credentials:
+
+    - SMTP Server: smtp.gmail.com
+    - user email: <Your-email>
+
+- In the Advance section, add:
+
+    - User email: <Your-email>
+    - Password: <the code you copied>
+
+- Check Use SSL 
+- SMTP port: 465
+
+### Extended E-mail Notification
+
+- Jenkins >> Manage Jenkins -> System -> Extended E-mail Notification
+- Add the following credentials:
+
+    - SMTP Server: smtp.gmail.com
+    - SMTP Port: 465
+
+- In the Advance section, add the credentials you already created.
+- Check Use SSL 
+- Choose Default content type as HTML
+- Configure the triguer as you like
+
+
 
 
