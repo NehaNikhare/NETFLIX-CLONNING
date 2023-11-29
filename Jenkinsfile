@@ -118,8 +118,9 @@ pipeline {
             }
         }
 
-        post {
-            always {
+    }
+    post {
+        always {
             emailext attachLog: true,
                 subject: "'${currentBuild.result}'",
                 body: "Project: ${env.JOB_NAME}<br/>" +
@@ -127,7 +128,6 @@ pipeline {
                     "URL: ${env.BUILD_URL}<br/>",
                 to: 'soufianeel288@gmail.com',
                 attachmentsPattern: 'trivy_scan.txt,trivy_image_scan.txt'
-            }
         }
     }
 }
