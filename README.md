@@ -1,6 +1,12 @@
 # Netfix Clone (DevSecOps project)
 
+This DevSecOps pipeline orchestrates the end-to-end development, security, and deployment processes for a Netflix clone. It begins by fetching the code from GitHub and rigorously examines its quality through SonarQube analysis and a stringent quality gate check. Security remains paramount, with OWASP and Trivy scans ensuring dependencies and the Docker image are free from vulnerabilities. Post-analysis, the pipeline seamlessly builds, pushes, and deploys the application using Docker, while ArgoCD and K3D handle the continuous deployment and management within a Kubernetes cluster. This comprehensive approach automates and safeguards the entire development lifecycle, ensuring a robust, secure, and efficiently deployed Netflix-like application.
+
 ### !!! Netflix-Clone code its not mine !!!
+
+
+[](https://github.com/chahid001/Netflix-Clone-DevSecOps/blob/main/assets/s.png)
+
 # Deployment
 
 ## Step 1: Inistial Setup
@@ -111,6 +117,9 @@ Just as before you need to add some credentials so the pipeline can run smoothly
 - TMDB API as Special text
 - Docker credentials as Username & Password
 - SonarQube Login and IP addr that are in the command you copied before in 'Create Project SQ' stage as Special texts
+- Github Credentials fot the repo where you put your manifetst files
+
+So basically when we push the Image to the DockerHUB, the pipeline going to change the deployment manifest file to the right build number of the image, so can ArgoCD sync and pull the new version of the image and deploy it.
 
 #### !! Remember to modify the names in the Jenkinsfile so they can be appropriate with the credentials and ENV !!
 
@@ -327,6 +336,24 @@ You can add Prometheus as a Data source, just go to Grafana GUI , HTTP://<IP_ADD
 - Choose Default content type as HTML
 - Configure the triguer as you like
 
+## Step 4: Kubernetes 
 
+There is 2 methods, the first one is creating a Kubernetes cluster using a cloud provider service (EKS or AKS), the second one is to create a third VM and install it manualy.
+
+Im gonna stick with the second method, and im gonna install K3D because its ligheweight and easy to install, so like the others just use the script provided in the 'setup' folder.
+
+```bash
+sh setup/docker-install.sh
+sh setup/kubernetes.sh
+```
+
+The script will :
+
+- Install K3D
+- Install Kubectl
+- Create K3S cluster and port mapping for both Netflix-clone and ArgoCD
+- Create Namespaces for ArgoCD and Netflix-clone
+- Install ArgoCD
+- Deploy Netflix-clone
 
 
