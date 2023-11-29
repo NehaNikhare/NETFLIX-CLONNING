@@ -1,9 +1,7 @@
 # Netfix Clone (DevSecOps project)
-
-This DevSecOps pipeline orchestrates the end-to-end development, security, and deployment processes for a Netflix clone. It begins by fetching the code from GitHub and rigorously examines its quality through SonarQube analysis and a stringent quality gate check. Security remains paramount, with OWASP and Trivy scans ensuring dependencies and the Docker image are free from vulnerabilities. Post-analysis, the pipeline seamlessly builds, pushes, and deploys the application using Docker, while ArgoCD and K3D handle the continuous deployment and management within a Kubernetes cluster. This comprehensive approach automates and safeguards the entire development lifecycle, ensuring a robust, secure, and efficiently deployed Netflix-like application.
-
 ### !!! Netflix-Clone code its not mine !!!
 
+This DevSecOps pipeline orchestrates the end-to-end development, security, and deployment processes for a Netflix clone. It begins by fetching the code from GitHub and rigorously examines its quality through SonarQube analysis and a stringent quality gate check. Security remains paramount, with OWASP and Trivy scans ensuring dependencies and the Docker image are free from vulnerabilities. Post-analysis, the pipeline seamlessly builds, pushes, and deploys the application using Docker, while ArgoCD and K3D handle the continuous deployment and management within a Kubernetes cluster. This comprehensive approach automates and safeguards the entire development lifecycle, ensuring a robust, secure, and efficiently deployed Netflix-like application.
 
 ![](https://github.com/chahid001/Netflix-Clone-DevSecOps/blob/main/assets/s.png)
 # Deployment
