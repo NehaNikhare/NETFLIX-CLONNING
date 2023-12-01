@@ -253,7 +253,7 @@ scrape_configs:
   - job_name: "jenkins"
     metrics_path: "/prometheus"
     static_configs:
-      - targets:["<your-jenkins-ip>:<your-jenkins-port>"]
+      - targets:["<your-jenkins-ip>:8080"]
 ```
 To verify everything is good, run 
 
